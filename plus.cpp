@@ -19,14 +19,14 @@ int main()
 			
 		}
 	display();
-	/*while(count) {
+	while(count) {
 		count=0;
 		for(i=0; i<9; i++)
 			for(j=0; j<9; j++)
 				if(sudoku[i][j]==0)
 					++count;
 		check();
-	}*/
+	}
 	for(i=0;i<5000;i++)
 		check();
 		random();
