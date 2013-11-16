@@ -42,84 +42,15 @@ int main()
 }
 int player_move(int X,char tic[][3] )
 {
-	switch(X) {
-	case 1:
-		if(tic[0][0]=='1') {
-			tic[0][0]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 2:
-		if(tic[0][1]=='2') {
-			tic[0][1]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 3:
-		if(tic[0][2]=='3') {
-			tic[0][2]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 4:
-		if(tic[1][0]=='4') {
-			tic[1][0]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 5:
-		if(tic[1][1]=='5') {
-			tic[1][1]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 6:
-		if(tic[1][2]=='6') {
-			tic[1][2]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 7:
-		if(tic[2][0]=='7') {
-			tic[2][0]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 8:
-		if(tic[2][1]=='8') {
-			tic[2][1]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	case 9:
-		if(tic[2][2]=='9') {
-			tic[2][2]='X';
-			return 0;
-		} else
-			printf("\nInvalid move");
-		return 1;
-
-	default:
-		printf("\nInvalid move");
-		return 1;
-
+	if(tic[(X-1)/3][(X-1)%3]!='X' && tic[(X-1)/3][(X-1)%3]!='O'){
+	tic[(X-1)/3][(X-1)%3]='X';
+	return 0;
 	}
+	else{
+	    printf("\nIvalid Move!!");
+	    return 1;
+	    }
+
        //	return 0;
 }
 int comp_move(char tic[][3])
@@ -177,7 +108,7 @@ int comp_move(char tic[][3])
 		tic[0][2]='O';
 		return 0;
 	}
-	r = rand() % 9;
+	r = (rand() % 9)+1;
 	if(tic[(r-1)/3][(r-1)%3]!='X' && tic[(r-1)/3][(r-1)%3]!='O') {
 		tic[(r-1)/3][(r-1)%3]='O';
 		return 0;
