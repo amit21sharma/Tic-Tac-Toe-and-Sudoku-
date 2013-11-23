@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
-int value_k(int q);
 void check_row(int);
 void check_column(int);
 void check();
@@ -9,14 +8,12 @@ void check_cell(int,int);
 void display();
 int possible[9];
 int sudoku[9][9];
-int zero_value[81];
 int q;
 int solve();
-void reset(int );
 int main()
 {
 	srand ( time(NULL) );
-	int a,i,j,count=1,precount;
+	int i,j,count=1,precount;
 	FILE *fp;
 	fp=fopen("D:\\sudoku.txt","r+");
 	for(i=0; i<9; i++)
