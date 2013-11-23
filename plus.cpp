@@ -30,13 +30,8 @@ int main()
 					++count;
 		if(precount==count) {
 			solve();
-		} else {
-			for(i=0; i<9; i++)
-				for(j=0; j<9; j++)
-					if(sudoku[i][j]==0) {
-						zero_value[q]=(i)*10+(j);
-						++q;
-					}
+		} 
+		else{
 			check();
 		}
 	}
