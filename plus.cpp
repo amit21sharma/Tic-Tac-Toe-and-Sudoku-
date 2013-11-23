@@ -1,4 +1,7 @@
 #include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
+int value_k(int q);
 void check_row(int);
 void check_column(int);
 void check();
@@ -7,36 +10,45 @@ void display();
 int possible[9];
 int sudoku[9][9];
 int zero_value[81];
-void random();
+int q;
+int solve();
+void reset(int );
 int main()
 {
-	int a,i,j,q=0,count=1;
-		FILE *fp;
+	srand ( time(NULL) );
+	int a,i,j,count=1,precount;
+	FILE *fp;
 	fp=fopen("D:\\sudoku.txt","r+");
 	for(i=0; i<9; i++)
 		for(j=0; j<9; j++) {
 			sudoku[i][j]=fgetc(fp)-'0';
-			
 		}
 	display();
 	while(count) {
+		precount=count;
 		count=0;
 		for(i=0; i<9; i++)
 			for(j=0; j<9; j++)
 				if(sudoku[i][j]==0)
 					++count;
-		check();
+		if(precount==count) {
+			solve();
+		} else {
+			for(i=0; i<9; i++)
+				for(j=0; j<9; j++)
+					if(sudoku[i][j]==0) {
+						zero_value[q]=(i)*10+(j);
+						++q;
+					}
+			check();
+		}
 	}
-	for(i=0;i<5000;i++)
-		check();
-		random();
-		
 	display();
 	return 0;
 }
 void display()
 {
-	int i,j,q=0;
+	int i,j;
 	printf("+--------------------------------+\n\n");
 	for(i=0; i<9; i++) {
 		printf("| ");
@@ -100,15 +112,41 @@ void check_cell(int i,int j)
 				possible[sudoku[k][l]-1]=0;
 			}
 }
-void random()
+int solve()
 {
-	int i,j,q=0;
-	for(i=0;i<9;i++)
-		for(j=0;j<9;j++)
-	if(sudoku[i][j]==0) {
-				zero_value[q]=(i)*10+(j);
-				++q;
+	int i,j,k,cnt,ipossible[9],count=0;
+	for(i=0; i<9; i++)
+		for(j=0; j<9; j++)
+			if(sudoku[i][j]==0) {
+				count++;
+				break;
 			}
-for(i=0;i<q;i++)
-	printf("%d ",zero_value[i]);
+	if(count==0) {
+		return 0;
+	}
+	for(k=1; k<=9; k++)
+		possible[k-1]=k;
+	for(i=0; i<9; i++)
+		for(j=0; j<9; j++)
+			if(sudoku[i][j]==0) {
+				check_row(i);
+				check_column(j);
+				check_cell(i,j);
+				for(k=0; k<9; k++)
+					ipossible[k]=possible[k];
+				cnt=0;
+				for(k=0; k<9; k++) {
+					if(ipossible[k]!=0) {
+						cnt++;
+						sudoku[i][j]=ipossible[k];
+						if(solve()==0) {
+							return 0;
+						}
+					}
+				}
+				sudoku[i][j]=0;
+				if(!cnt) {
+					return 1;
+				}
+			}
 }
