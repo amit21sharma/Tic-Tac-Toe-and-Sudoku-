@@ -3,7 +3,6 @@
 #include<stdlib.h>
 void check_row(int);
 void check_column(int);
-void check();
 void check_cell(int,int);
 void display();
 int possible[9];
@@ -28,12 +27,7 @@ int main()
 			for(j=0; j<9; j++)
 				if(sudoku[i][j]==0)
 					++count;
-		if(precount==count) {
 			solve();
-		} 
-		else{
-			check();
-		}
 	}
 	display();
 	return 0;
@@ -54,29 +48,6 @@ void display()
 		if((i+1)%3==0)
 			printf("\n\n+--------------------------------+");
 		printf("\n\n");
-	}
-}
-void check()
-{
-	int i,j,k,count,c,q;
-	for(i=0; i<9; i++) {
-		for(j=0; j<9; j++) {
-			for(k=1; k<=9; k++)
-				possible[k-1]=k;
-			if(sudoku[i][j]==0) {
-				check_row(i);
-				check_column(j);
-				check_cell(i,j);
-			}
-			count=0;
-			for(c=0; c<9; c++)
-				if(possible[c]!=0) {
-					++count;
-					q=c;
-				}
-			if(count==1)
-				sudoku[i][j]=possible[q];
-		}
 	}
 }
 void check_row(int i)

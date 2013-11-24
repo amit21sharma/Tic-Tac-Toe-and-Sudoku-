@@ -8,14 +8,14 @@ int player_move(int X,char tic[][3] );
 int comp_move(char tic[][3]);
 void display(char tic[][3]);
 int main()
-
 {
 	int win=0,i,j;
 	int ret,retcomp;
 	int X;
 	char tic[][3]= {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
 	srand(time(NULL));
-	do {    system("cls");
+	do {   
+		system("cls");
 		display(tic);
 		do {                                   // PLAYER MOVE
 			printf("\nPlayer 1: ");
@@ -50,8 +50,6 @@ int player_move(int X,char tic[][3] )
 	    printf("\nIvalid Move!!");
 	    return 1;
 	    }
-
-       //	return 0;
 }
 int comp_move(char tic[][3])
 {
@@ -123,7 +121,6 @@ int check_win(char tic[][3])
 			if(tic[i][j]=='X' || tic[i][j]=='O')
 				count++;
 		}
-	//printf("\n%d",count);
 	if (count==9) {
 		printf("\nMATCH DRAW!\n");
 		return 1;
