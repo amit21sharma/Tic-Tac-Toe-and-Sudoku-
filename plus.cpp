@@ -1,17 +1,13 @@
 #include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
 void check_row(int);
 void check_column(int);
 void check_cell(int,int);
 void display();
 int possible[9];
 int sudoku[9][9];
-int q;
 int solve();
 int main()
 {
-	srand ( time(NULL) );
 	int i,j;
 	FILE *fp;
 	fp=fopen("D:\\sudoku.txt","r+");
@@ -70,15 +66,6 @@ void check_cell(int i,int j)
 int solve()
 {
 	int i,j,k,cnt,ipossible[9],count=0;
-	for(i=0; i<9; i++)
-		for(j=0; j<9; j++)
-			if(sudoku[i][j]==0) {
-				count++;
-				break;
-			}
-	if(count==0) {
-		return 0;
-	}
 	for(k=1; k<=9; k++)
 		possible[k-1]=k;
 	for(i=0; i<9; i++)
